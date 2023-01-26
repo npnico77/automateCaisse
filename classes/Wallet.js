@@ -26,11 +26,13 @@ export class Wallet{
 
     }
 
+    //ajouter piece ou billet au wallet
     addCash(name, quantity = 1){
         this.stock[name] += quantity;
         console.log(this.stock[name]);
     }
 
+    //enlever piece ou billet au wallet
     removeCash(name, quantity = 1){
         if (this.stock[name]>=quantity){
             this.stock[name] -= quantity;
@@ -39,6 +41,7 @@ export class Wallet{
         }
     }
 
+    //compte la somme totale du wallet
     countCash(){
         let sum = 0; 
         for(let elt in this.stock){

@@ -15,6 +15,7 @@ document.querySelector("#scanArticle").addEventListener("click",function (){
     caisse.scanArticle();
 });
 
+//au clic sur billet ou piece
 document.querySelectorAll(".argent").forEach(function(element){
     element.addEventListener("click", function(){
         // on ne peut pas ajouter d'argent tant que article = 0
@@ -26,15 +27,17 @@ document.querySelectorAll(".argent").forEach(function(element){
             caisse.cashFund.addCash(name); 
             // on déduit le montant payé du reste à payer
             resteApayer = caisse.totalArticles.toFixed(2) - caisse.cashPaid.countCash().toFixed(2);
-            // si le montant donnée est sup ou égale à totalArticles
-            // => - on bloque la possibilité de rajouter billets et pieces 
-            if (resteApayer <= 0){            
+           
+            if (resteApayer <= 0){   
+                 // si le montant donnée est sup ou égale à totalArticles
+                // => - on bloque la possibilité de rajouter billets et pieces          
                 document.querySelector("#resteAPayer").innerText = "0";
                 document.querySelectorAll(".argent").forEach(function(element){
                     element.disabled = true;
                 });
                 resteApayer = 0;
                 document.querySelector("#dejaPaye").innerText = caisse.cashPaid.countCash().toFixed(2);
+                //on active le bouton de paiement final
                 document.getElementById("payer").disabled = false;    
             }else{                   
                 document.querySelector("#resteAPayer").innerText = resteApayer.toFixed(2);
@@ -44,7 +47,7 @@ document.querySelectorAll(".argent").forEach(function(element){
         }            
     });
 });
-
+// au clic sur payer on procède au rendu de monnaie
 document.getElementById("payer").addEventListener("click",function (){
     if(resteApayer == 0){
         caisse.proceedPayment();

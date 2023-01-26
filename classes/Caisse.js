@@ -28,9 +28,12 @@ export class Caisse{
 
 
     scanArticle(){
+        // on génére un article avec un prix aléatoire jusqu'a 15€
         let prixArticle = this.generateRandomPrice(0.1,15);
+        // on compte le nombre d'articles
         this.nbrArticles++;
         document.querySelector("#nbreArticles").innerText = this.nbrArticles;
+        // on affiche le total article
         this.totalArticles += parseFloat(prixArticle);
         document.querySelector("#totalArticles").innerText = this.totalArticles.toFixed(2);
         document.querySelector("#resteAPayer").innerText = this.totalArticles.toFixed(2);
