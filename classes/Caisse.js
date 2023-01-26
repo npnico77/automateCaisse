@@ -90,6 +90,7 @@ export class Caisse{
                 this.montantARendre -= valeur.value;
                 this.montantARendre = this.montantARendre.toFixed(2);
                 this.cashPaid.removeCash(valeur.name);
+                this.cashFund.removeCash(valeur.name);
                 this.cashBack.addCash(valeur.name);
                 break;
               }
@@ -108,7 +109,7 @@ export class Caisse{
                 }
             }
             this.affichageMonnaie();            
-            document.getElementById("newClient").style.display = "block";
+            document.getElementById("newClient").disabled = false;
           }else{
             alert("Il n'y a pas assez en fond de caisse pour rendre la monnaie");
           }        
@@ -123,7 +124,7 @@ export class Caisse{
     affichageMonnaie(){         
         for(let elt of this.affichageArendre){    
             let divMonnaie = document.createElement("div");  
-            divMonnaie.classList.add("btn","text-center","m-1");  
+            divMonnaie.classList.add("renduMonnaie","btn","text-center","m-1");  
             divMonnaie.style.width = "100px";    
             switch(elt){
                 case "50E" : 
@@ -188,12 +189,13 @@ export class Caisse{
     }
 
     newClient(){
-        console.log("ok");
         this.nbrArticles = 0;
         this.totalArticles = 0;
         this.montantARendre = 0;
         this.affichageArendre =[];
-        document.querySelector(".affichageMonnaie").innerHTML = "";
+        document.querySelectorAll(".renduMonnaie").forEach(function(element) {
+            element.remove();
+          });
         document.getElementById("payer").disabled = true;  
         document.querySelectorAll(".argent").forEach(function(element){
             element.disabled = false;

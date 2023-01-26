@@ -47,5 +47,5 @@ document.getElementById("payer").addEventListener("click",function (){
 
 document.getElementById("newClient").addEventListener("click",function (){
     caisse.newClient();    
-    this.style.display = "none";
+    this.disabled = true;
 });
