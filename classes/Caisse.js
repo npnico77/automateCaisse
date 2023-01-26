@@ -25,6 +25,7 @@ export class Caisse{
         this.nbrArticles = 0;
         this.totalArticles = 0;
         this.montantARendre = 0;
+        this.affichageArendre =[];
     }
 
 
@@ -63,7 +64,6 @@ export class Caisse{
         //on déduit cashback de cashfund en vérifiant avant si c'est possible
         // si ok => on rend la monnaie sinon on demande un réappro du fond de caisse
 
-        // Boucle pour voir si on peut rendre pour chaque valeur en fonction de ce qu'il y a en caisse
         const denominations = [
             {name: "50E", value: 50},
             {name: "20E", value: 20},
@@ -78,6 +78,7 @@ export class Caisse{
             {name: "1C", value: 0.01}
           ];
           
+        // Boucle pour voir si on peut rendre pour chaque valeur en fonction de ce qu'il y a en caisse
           let compteurCaisse = 0;
           while (this.montantARendre > 0 || compteurCaisse < 12) {
             for (let i = 0; i < denominations.length; i++) {
@@ -87,21 +88,26 @@ export class Caisse{
                 this.montantARendre = this.montantARendre.toFixed(2);
                 this.cashPaid.removeCash(denomination.name);
                 this.cashBack.addCash(denomination.name);
-                console.log(this.montantARendre);
                 break;
               }
             }
             compteurCaisse++;
           }
           if(this.montantARendre == 0){
-            //on affiche le rendu de monnaie
-            console.log(this.cashBack);
+            //on affiche le rendu de monnaie            
+            for(let elt in this.cashBack.stock){ 
+                let valeur = 0; 
+                if (this.cashBack.stock[elt] > 0 ){  
+                    valeur = parseInt(this.cashBack.stock[elt]);
+                    for (let i=0; i < valeur; i++){
+                        affichageArendre += elt;                        
+                    }      
+                }
+            }
+            document.querySelector(".affichageMonnaie").innerHTML = affichageArendre;
           }else{
             alert("Il n'y a pas assez en fond de caisse pour rendre la monnaie");
-          }
-
-
-        
+          }        
     }
 
     //TOOLS
@@ -111,3 +117,42 @@ export class Caisse{
     }
 
 }
+
+/*switch(elt){
+    case "50E" :
+        affichageArendre += '<div class="btn text-center btn-info m-1" style="width:100px">50€</div>';
+        break;
+    case "20E" :
+        affichageArendre += '<div class="btn text-center btn-info m-1" style="width:100px">20€</div>';
+        break;
+    case "10E" :
+        affichageArendre += '<div class="btn text-center btn-info m-1" style="width:100px">10€</div>';
+        break;
+    case "5E" :
+        affichageArendre += '<div class="btn text-center btn-info m-1" style="width:100px">5€</div>';
+        break;
+    case "2E" :
+        affichageArendre += '<div class="btn text-center btn-secondary rounded-5 m-1" style="width:50px">2€</div>';
+        break;
+    case "1E" :
+        affichageArendre += '<div class="btn text-center btn-secondary rounded-5 m-1" style="width:50px">1€</div>';
+        break;
+    case "50C" :
+        affichageArendre += '<div class="btn text-center btn-warning rounded-5 m-1" style="width:50px">50c</div>';
+        break;
+    case "20C" :
+        affichageArendre += '<div class="btn text-center btn-warning rounded-5 m-1" style="width:50px">20c</div>';
+        break;
+    case "10C" :
+        affichageArendre += '<div class="btn text-center btn-warning rounded-5 m-1" style="width:50px">10c</div>';
+        break;
+    case "5C" :
+        affichageArendre += '<div class="btn text-center btn-danger rounded-5 m-1" style="width:50px">5c</div>';
+        break;
+    case "2C" :
+        affichageArendre += '<div class="btn text-center btn-danger rounded-5 m-1" style="width:50px">2c</div>';
+        break;
+    case "1C" :
+        affichageArendre += '<div class="btn text-center btn-danger rounded-5 m-1" style="width:50px">1c</div>';
+        break;
+}*/
