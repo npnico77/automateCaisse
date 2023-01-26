@@ -64,7 +64,8 @@ export class Caisse{
         //on déduit cashback de cashfund en vérifiant avant si c'est possible
         // si ok => on rend la monnaie sinon on demande un réappro du fond de caisse
 
-        const denominations = [
+        // tableau pour récupérer les valeurs et automatiser dans une boucle
+        const valeurs = [
             {name: "50E", value: 50},
             {name: "20E", value: 20},
             {name: "10E", value: 10},
@@ -79,15 +80,17 @@ export class Caisse{
           ];
           
         // Boucle pour voir si on peut rendre pour chaque valeur en fonction de ce qu'il y a en caisse
+          // compteur pour arreter la boucle une fois qu'il a regarder tous les types de monnaie
           let compteurCaisse = 0;
-          while (this.montantARendre > 0 || compteurCaisse < 12) {
-            for (let i = 0; i < denominations.length; i++) {
-              let denomination = denominations[i];
-              if (this.montantARendre >= denomination.value && this.cashFund.stock[denomination.name] >= 1) {
-                this.montantARendre -= denomination.value;
+
+          while (this.montantARendre > 0 || compteurCaisse <= valeurs.lenght) {
+            for (let i = 0; i < valeurs.length; i++) {
+              let valeur = valeurs[i];
+              if (this.montantARendre >= valeur.value && this.cashFund.stock[valeur.name] >= 1) {
+                this.montantARendre -= valeur.value;
                 this.montantARendre = this.montantARendre.toFixed(2);
-                this.cashPaid.removeCash(denomination.name);
-                this.cashBack.addCash(denomination.name);
+                this.cashPaid.removeCash(valeur.name);
+                this.cashBack.addCash(valeur.name);
                 break;
               }
             }
