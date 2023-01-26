@@ -78,7 +78,7 @@ export class Caisse{
             {name: "5C", value : 0.05},
             {name: "1C", value: 0.01}
           ];
-          
+           
         // Boucle pour voir si on peut rendre pour chaque valeur en fonction de ce qu'il y a en caisse
           // compteur pour arreter la boucle une fois qu'il a regarder tous les types de monnaie
           let compteurCaisse = 0;
