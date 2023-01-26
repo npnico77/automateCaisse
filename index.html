@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoCash</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+
+</head>
+<body class="container">
+    <header class="text-center">
+        <h3>Auto-Cash 2000</h3>
+    </header>
+    <div id="autocash-container" class="container border border-dark border-2 p-3 bg-body-tertiary">
+        <div class="row">
+            <div class="col col-12 col-md-6">
+                <div class="mb-2">
+                    <button class="btn border-success text-success text-center" id="scanArticle" style="width: 60px;" type="button"><i class="fa-solid fa-plus-circle" aria-hidden="true"></i></button>
+                    <span class="text-success ms-1 fw-bold">Scanner un article</span>
+                </div>
+                <div class="mb-5">
+                    <div class="col">
+                        <button class="btn border-primary text-primary text-center" id="payer" style="width: 60px;" type="button" disabled><i class="fas fa-euro-sign"></i></button>
+                        <span class="text-primary ms-1 fw-bold">Payer</span>
+                    </div>
+                </div>                 
+            </div>
+            <div class="col col-12 col-md-6 d-flex flex-column align-items-end mb-2">       
+                <div class="fw-bold ">Montant total :</div>         
+                <div class="border border-dark p-2 text-end fw-bold" style="width:120px"><span id="totalArticles">0.00</span>€</div>
+                <div>Article(s) : <span id="nbreArticles">0</span></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-12 col-md-6 mb-2">
+                <div class="billets mb-1">
+                    <button id="50E" class="btn text-center btn-info argent" style="width:24%" type="button">50€</button>
+                    <button id="20E" class="btn text-center btn-info argent" style="width:24%" type="button">20€</button>
+                    <button id="10E" class="btn text-center btn-info argent" style="width:24%" type="button">10€</button>
+                    <button id="5E" class="btn text-center btn-info argent" style="width:24%" type="button">5€</button>
+                </div>
+                <div class="pieces">
+                    <button id="2E" class="btn text-center btn-secondary rounded-5 argent" style="width:11%" type="button">2€</button>
+                    <button id="1E" class="btn text-center btn-secondary rounded-5 argent" style="width:11%" type="button">1€</button>
+                    <button id="50C" class="btn text-center btn-warning rounded-5 argent" style="width:11%" type="button">50c</button>
+                    <button id="20C" class="btn text-center btn-warning rounded-5 argent" style="width:11%" type="button">20c</button>
+                    <button id="10C" class="btn text-center btn-warning rounded-5 argent" style="width:11%" type="button">10c</button>
+                    <button id="5C" class="btn text-center btn-danger rounded-5 argent" style="width:11%" type="button">5c</button>
+                    <button id="2C" class="btn text-center btn-danger rounded-5 argent" style="width:11%" type="button">2c</button>
+                    <button id="1C" class="btn text-center btn-danger rounded-5 argent" style="width:11%" type="button">1c</button>
+                </div>
+                    
+            </div>
+            <div class="col col-12 col-md-6 d-flex flex-column align-items-end">       
+                <div class="fw-bold ">Reste à payer :</div>         
+                <div class="border border-dark p-2 text-end fw-bold" style="width:120px"><span id="resteAPayer">0.00</span>€</div>
+                <div>Déjà payé : <span id="dejaPaye">0.00</span>€</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="fw-bold">Retour monnaie :</div>
+                <div class="border border-dark p-1 bg-primary-subtle" style="min-height: 200px;"></div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/3dbe06d587.js" crossorigin="anonymous"></script>
+    <script src="index.js" type="module"></script>
+</body>
+</html>
