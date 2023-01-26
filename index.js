@@ -1,13 +1,6 @@
 import { Caisse } from "./classes/Caisse.js";
 
 const caisse = new Caisse();
-//caisse.cashPaid.addCash("50E",5);
-//caisse.cashPaid.removeCash("50E",4);
-//caisse.cashPaid.removeCash("50E",2);
-//caisse.cashFund.countCash();
-//caisse.scanArticle();
-//caisse.scanArticle();
-//caisse.scanArticle();
 
 let resteApayer = 0;
 

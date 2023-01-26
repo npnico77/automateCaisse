@@ -100,11 +100,11 @@ export class Caisse{
                 if (this.cashBack.stock[elt] > 0 ){  
                     valeur = parseInt(this.cashBack.stock[elt]);
                     for (let i=0; i < valeur; i++){
-                        affichageArendre += elt;                        
+                        this.affichageArendre.push(elt);                        
                     }      
                 }
             }
-            document.querySelector(".affichageMonnaie").innerHTML = affichageArendre;
+            this.affichageMonnaie();
           }else{
             alert("Il n'y a pas assez en fond de caisse pour rendre la monnaie");
           }        
@@ -116,43 +116,72 @@ export class Caisse{
         return price;
     }
 
+    affichageMonnaie(){         
+        for(let elt of this.affichageArendre){    
+            let divMonnaie = document.createElement("div");  
+            divMonnaie.classList.add("btn","text-center","m-1");  
+            divMonnaie.style.width = "100px";    
+            switch(elt){
+                case "50E" : 
+                    divMonnaie.classList.add("btn-info");
+                    divMonnaie.innerText = "50€";
+                    break;
+                case "20E" :            
+                    divMonnaie.classList.add("btn-info");        
+                    divMonnaie.innerText = "20€";
+                    break;
+                case "10E" :    
+                    divMonnaie.classList.add("btn-info");  
+                    divMonnaie.innerText = "10€";
+                    break;
+                case "5E" :              
+                    divMonnaie.classList.add("btn-info");    
+                    divMonnaie.innerText = "5€";
+                    break;
+                case "2E" :                                      
+                    divMonnaie.classList.add("btn-secondary","rounded-5");
+                    divMonnaie.style.width = "50px";
+                    divMonnaie.innerText = "2€";
+                    break;
+                case "1E" :                                  
+                    divMonnaie.classList.add("btn-secondary","rounded-5");
+                    divMonnaie.style.width = "50px";
+                    divMonnaie.innerText = "1€";
+                    break;
+                case "50C" :                           
+                    divMonnaie.classList.add("btn-secondary","rounded-5");
+                    divMonnaie.style.width = "50px";
+                    divMonnaie.innerText = "50c";
+                    break;
+                case "20C" :
+                    divMonnaie.classList.add("btn-warning","rounded-5");
+                    divMonnaie.style.width = "50px";
+                    divMonnaie.innerText = "20c";
+                    break;
+                case "10C" :
+                    divMonnaie.classList.add("btn-warning","rounded-5");
+                    divMonnaie.style.width = "50px";
+                    divMonnaie.innerText = "10c";
+                    break;
+                case "5C" :
+                    divMonnaie.classList.add("btn-danger","rounded-5");
+                    divMonnaie.style.width = "50px";
+                    divMonnaie.innerText = "5c";
+                    break;
+                case "2C" :
+                    divMonnaie.classList.add("btn-danger","rounded-5");
+                    divMonnaie.style.width = "50px";
+                    divMonnaie.innerText = "2c";
+                    break;
+                case "1C" :
+                    divMonnaie.classList.add("btn-danger","rounded-5");
+                    divMonnaie.style.width = "50px";
+                    divMonnaie.innerText = "1c";
+                    break;
+            }            
+            document.querySelector(".affichageMonnaie").append(divMonnaie);
+            
+        }
+    }
+       
 }
-
-/*switch(elt){
-    case "50E" :
-        affichageArendre += '<div class="btn text-center btn-info m-1" style="width:100px">50€</div>';
-        break;
-    case "20E" :
-        affichageArendre += '<div class="btn text-center btn-info m-1" style="width:100px">20€</div>';
-        break;
-    case "10E" :
-        affichageArendre += '<div class="btn text-center btn-info m-1" style="width:100px">10€</div>';
-        break;
-    case "5E" :
-        affichageArendre += '<div class="btn text-center btn-info m-1" style="width:100px">5€</div>';
-        break;
-    case "2E" :
-        affichageArendre += '<div class="btn text-center btn-secondary rounded-5 m-1" style="width:50px">2€</div>';
-        break;
-    case "1E" :
-        affichageArendre += '<div class="btn text-center btn-secondary rounded-5 m-1" style="width:50px">1€</div>';
-        break;
-    case "50C" :
-        affichageArendre += '<div class="btn text-center btn-warning rounded-5 m-1" style="width:50px">50c</div>';
-        break;
-    case "20C" :
-        affichageArendre += '<div class="btn text-center btn-warning rounded-5 m-1" style="width:50px">20c</div>';
-        break;
-    case "10C" :
-        affichageArendre += '<div class="btn text-center btn-warning rounded-5 m-1" style="width:50px">10c</div>';
-        break;
-    case "5C" :
-        affichageArendre += '<div class="btn text-center btn-danger rounded-5 m-1" style="width:50px">5c</div>';
-        break;
-    case "2C" :
-        affichageArendre += '<div class="btn text-center btn-danger rounded-5 m-1" style="width:50px">2c</div>';
-        break;
-    case "1C" :
-        affichageArendre += '<div class="btn text-center btn-danger rounded-5 m-1" style="width:50px">1c</div>';
-        break;
-}*/
