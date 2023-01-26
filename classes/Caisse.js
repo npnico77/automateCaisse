@@ -24,6 +24,7 @@ export class Caisse{
 
         this.nbrArticles = 0;
         this.totalArticles = 0;
+        this.montantARendre = 0;
     }
 
 
@@ -45,17 +46,62 @@ export class Caisse{
         // on calcul le montant donné
         let sommeDonnee = this.cashPaid.countCash();
         // on deduit totalArticles de ce montant pour connaitre le montant à rendre
-        let montantARendre = this.cashPaid.countCash() - this.totalArticles;
-        montantARendre = montantARendre.toFixed(2);
-        console.log(montantARendre);
-        document.getElementById("payer").disabled = true;    
-        // on lance la fonction proceedCashback
+        this.montantARendre = sommeDonnee - this.totalArticles;
+        this.montantARendre = this.montantARendre.toFixed(2);
+        console.log(this.montantARendre);
+        document.getElementById("payer").disabled = true; 
+        // on affiche le montant à rendre :
+        let divMonnaie = document.createElement("div");
+        divMonnaie.classList.add("fw-bold");
+        divMonnaie.innerHTML = "Monnaie à rendre : "+ this.montantARendre +"€"
+        document.querySelector(".paiement").append(divMonnaie)   
+        this.proceedCashback();
     }
 
     proceedCashback(){
         // on décompose le montant à rendre en nbre de billets et pieces =>on obtient cashback
         //on déduit cashback de cashfund en vérifiant avant si c'est possible
-        // si ok => on rend la monnaie
+        // si ok => on rend la monnaie sinon on demande un réappro du fond de caisse
+
+        // Boucle pour voir si on peut rendre pour chaque valeur en fonction de ce qu'il y a en caisse
+        const denominations = [
+            {name: "50E", value: 50},
+            {name: "20E", value: 20},
+            {name: "10E", value: 10},
+            {name: "5E", value: 5},
+            {name: "2E", value: 2},
+            {name: "1E", value: 1},
+            {name: "50C", value : 0.5},
+            {name: "20C", value : 0.2},
+            {name: "10C", value : 0.1},
+            {name: "5C", value : 0.05},
+            {name: "1C", value: 0.01}
+          ];
+          
+          let compteurCaisse = 0;
+          while (this.montantARendre > 0 || compteurCaisse < 12) {
+            for (let i = 0; i < denominations.length; i++) {
+              let denomination = denominations[i];
+              if (this.montantARendre >= denomination.value && this.cashFund.stock[denomination.name] >= 1) {
+                this.montantARendre -= denomination.value;
+                this.montantARendre = this.montantARendre.toFixed(2);
+                this.cashPaid.removeCash(denomination.name);
+                this.cashBack.addCash(denomination.name);
+                console.log(this.montantARendre);
+                break;
+              }
+            }
+            compteurCaisse++;
+          }
+          if(this.montantARendre == 0){
+            //on affiche le rendu de monnaie
+            console.log(this.cashBack);
+          }else{
+            alert("Il n'y a pas assez en fond de caisse pour rendre la monnaie");
+          }
+
+
+        
     }
 
     //TOOLS

@@ -49,7 +49,5 @@ document.querySelectorAll(".argent").forEach(function(element){
 });
 // au clic sur payer on procède au rendu de monnaie
 document.getElementById("payer").addEventListener("click",function (){
-    if(resteApayer == 0){
-        caisse.proceedPayment();
-    }
+    caisse.proceedPayment();
 });

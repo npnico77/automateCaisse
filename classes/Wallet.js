@@ -29,15 +29,13 @@ export class Wallet{
     //ajouter piece ou billet au wallet
     addCash(name, quantity = 1){
         this.stock[name] += quantity;
-        console.log(this.stock[name]);
     }
 
     //enlever piece ou billet au wallet
     removeCash(name, quantity = 1){
         if (this.stock[name]>=quantity){
             this.stock[name] -= quantity;
-        }else{
-            alert("Montant insuffisant dans la caisse");
+            this.alerteCaisse = false;
         }
     }
 
