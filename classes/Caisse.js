@@ -52,10 +52,10 @@ export class Caisse{
         console.log(this.montantARendre);
         document.getElementById("payer").disabled = true; 
         // on affiche le montant à rendre :
-        let divMonnaie = document.createElement("div");
-        divMonnaie.classList.add("fw-bold");
+        /*let divMonnaie = document.createElement("div");
+        divMonnaie.classList.add("fw-bold","monnaieArendre");
         divMonnaie.innerHTML = "Monnaie à rendre : "+ this.montantARendre +"€"
-        document.querySelector(".paiement").append(divMonnaie)   
+        document.querySelector(".paiement").append(divMonnaie)  */ 
         this.proceedCashback();
     }
 
@@ -107,7 +107,8 @@ export class Caisse{
                     }      
                 }
             }
-            this.affichageMonnaie();
+            this.affichageMonnaie();            
+            document.getElementById("newClient").style.display = "block";
           }else{
             alert("Il n'y a pas assez en fond de caisse pour rendre la monnaie");
           }        
@@ -182,9 +183,54 @@ export class Caisse{
                     divMonnaie.innerText = "1c";
                     break;
             }            
-            document.querySelector(".affichageMonnaie").append(divMonnaie);
-            
+            document.querySelector(".affichageMonnaie").append(divMonnaie);            
         }
+    }
+
+    newClient(){
+        console.log("ok");
+        this.nbrArticles = 0;
+        this.totalArticles = 0;
+        this.montantARendre = 0;
+        this.affichageArendre =[];
+        document.querySelector(".affichageMonnaie").innerHTML = "";
+        document.getElementById("payer").disabled = true;  
+        document.querySelectorAll(".argent").forEach(function(element){
+            element.disabled = false;
+        });
+        document.getElementById("scanArticle").disabled = false;      
+        document.querySelector("#nbreArticles").innerText = "0.00";
+        document.querySelector("#totalArticles").innerText = "0";
+        document.querySelector("#resteAPayer").innerText = "0.00";
+        document.querySelector("#dejaPaye").innerText = "0.00";
+        this.cashPaid.stock = {
+            "50E" : 0,
+            "20E" : 0,
+            "10E" : 0,
+            "5E"  : 0,
+            "2E"  : 0,
+            "1E"  : 0,
+            "50C" : 0,
+            "20C" : 0,
+            "10C" : 0,
+            "5C"  : 0,
+            "2C"  : 0,
+            "1C"  : 0,
+        };    
+        this.cashBack.stock = {
+            "50E" : 0,
+            "20E" : 0,
+            "10E" : 0,
+            "5E"  : 0,
+            "2E"  : 0,
+            "1E"  : 0,
+            "50C" : 0,
+            "20C" : 0,
+            "10C" : 0,
+            "5C"  : 0,
+            "2C"  : 0,
+            "1C"  : 0,
+        };
     }
        
 }

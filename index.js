@@ -44,3 +44,8 @@ document.querySelectorAll(".argent").forEach(function(element){
 document.getElementById("payer").addEventListener("click",function (){
     caisse.proceedPayment();
 });
+
+document.getElementById("newClient").addEventListener("click",function (){
+    caisse.newClient();    
+    this.style.display = "none";
+});
