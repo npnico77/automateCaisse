@@ -16,7 +16,7 @@ export class Caisse{
             "10C" : 50,
             "5C"  : 50,
             "2C"  : 50,
-            "1C"  : 50,
+            "1C"  : 50
         };
         this.cashFund = new Wallet("cashFund", cashFundInitializer);
         this.cashPaid = new Wallet("cashPaid");
@@ -51,11 +51,13 @@ export class Caisse{
         this.montantARendre = this.montantARendre.toFixed(2);
         console.log(this.montantARendre);
         document.getElementById("payer").disabled = true; 
+
         // on affiche le montant à rendre :
         /*let divMonnaie = document.createElement("div");
         divMonnaie.classList.add("fw-bold","monnaieArendre");
         divMonnaie.innerHTML = "Monnaie à rendre : "+ this.montantARendre +"€"
         document.querySelector(".paiement").append(divMonnaie)  */ 
+        
         this.proceedCashback();
     }
 
@@ -121,71 +123,41 @@ export class Caisse{
         return price;
     }
 
-    affichageMonnaie(){         
-        for(let elt of this.affichageArendre){    
-            let divMonnaie = document.createElement("div");  
-            divMonnaie.classList.add("renduMonnaie","btn","text-center","m-1");  
-            divMonnaie.style.width = "100px";    
-            switch(elt){
-                case "50E" : 
-                    divMonnaie.classList.add("btn-info");
-                    divMonnaie.innerText = "50€";
-                    break;
-                case "20E" :            
-                    divMonnaie.classList.add("btn-info");        
-                    divMonnaie.innerText = "20€";
-                    break;
-                case "10E" :    
-                    divMonnaie.classList.add("btn-info");  
-                    divMonnaie.innerText = "10€";
-                    break;
-                case "5E" :              
-                    divMonnaie.classList.add("btn-info");    
-                    divMonnaie.innerText = "5€";
-                    break;
-                case "2E" :                                      
-                    divMonnaie.classList.add("btn-secondary","rounded-5");
+   async affichageMonnaie(){     
+        
+        const denoms = [
+            {position: 1 ,value: '50E', classes: 'btn-info', text: '50€'},
+            {position: 2 ,value: '20E', classes: 'btn-info', text: '20€'},
+            {position: 3 ,value: '10E', classes: 'btn-info', text: '10€'},
+            {position: 4 ,value: '5E', classes: 'btn-info', text: '5€'},
+            {position: 5 ,value: '2E', classes: 'btn-secondary', text: '2€'},
+            {position: 6 ,value: '1E', classes: 'btn-secondary', text: '1€'},
+            {position: 7 ,value: '50C', classes: 'btn-warning', text: '50c'},
+            {position: 8 ,value: '20C', classes: 'btn-warning', text: '20c'},
+            {position: 9 ,value: '10C', classes: 'btn-warning', text: '10c'},
+            {position: 10 ,value: '5C', classes: 'btn-danger', text: '5c'},
+            {position: 11 ,value: '2C', classes: 'btn-danger', text: '2c'},
+            {position: 12 ,value: '1C', classes: 'btn-danger', text: '1c'}
+          ]
+       
+         for (let elt of this.affichageArendre) {
+           let divMonnaie = document.createElement('button');
+           divMonnaie.classList.add('renduMonnaie', 'btn', 'text-center', 'm-1');
+           divMonnaie.style.width = '100px';
+           divMonnaie.disabled = true;
+           let denom = denoms.find(d => d.value === elt);
+           if (denom) {
+                divMonnaie.classList.add(denom.classes);
+                divMonnaie.innerText = denom.text;
+                if(denom.position > 4){
                     divMonnaie.style.width = "50px";
-                    divMonnaie.innerText = "2€";
-                    break;
-                case "1E" :                                  
-                    divMonnaie.classList.add("btn-secondary","rounded-5");
-                    divMonnaie.style.width = "50px";
-                    divMonnaie.innerText = "1€";
-                    break;
-                case "50C" :                           
-                    divMonnaie.classList.add("btn-secondary","rounded-5");
-                    divMonnaie.style.width = "50px";
-                    divMonnaie.innerText = "50c";
-                    break;
-                case "20C" :
-                    divMonnaie.classList.add("btn-warning","rounded-5");
-                    divMonnaie.style.width = "50px";
-                    divMonnaie.innerText = "20c";
-                    break;
-                case "10C" :
-                    divMonnaie.classList.add("btn-warning","rounded-5");
-                    divMonnaie.style.width = "50px";
-                    divMonnaie.innerText = "10c";
-                    break;
-                case "5C" :
-                    divMonnaie.classList.add("btn-danger","rounded-5");
-                    divMonnaie.style.width = "50px";
-                    divMonnaie.innerText = "5c";
-                    break;
-                case "2C" :
-                    divMonnaie.classList.add("btn-danger","rounded-5");
-                    divMonnaie.style.width = "50px";
-                    divMonnaie.innerText = "2c";
-                    break;
-                case "1C" :
-                    divMonnaie.classList.add("btn-danger","rounded-5");
-                    divMonnaie.style.width = "50px";
-                    divMonnaie.innerText = "1c";
-                    break;
-            }            
-            document.querySelector(".affichageMonnaie").append(divMonnaie);            
-        }
+                    divMonnaie.classList.add("rounded-5");
+                }
+            }
+            document.querySelector('.affichageMonnaie').append(divMonnaie);
+            // attente de 0.5s entre l'affichage de chaque billet/piece
+            await new Promise((resolve, reject) => setTimeout(resolve, 500));
+         }
     }
 
     newClient(){
@@ -197,9 +169,6 @@ export class Caisse{
             element.remove();
           });
         document.getElementById("payer").disabled = true;  
-        document.querySelectorAll(".argent").forEach(function(element){
-            element.disabled = false;
-        });
         document.getElementById("scanArticle").disabled = false;      
         document.querySelector("#nbreArticles").innerText = "0.00";
         document.querySelector("#totalArticles").innerText = "0";
@@ -217,7 +186,7 @@ export class Caisse{
             "10C" : 0,
             "5C"  : 0,
             "2C"  : 0,
-            "1C"  : 0,
+            "1C"  : 0
         };    
         this.cashBack.stock = {
             "50E" : 0,
@@ -231,7 +200,7 @@ export class Caisse{
             "10C" : 0,
             "5C"  : 0,
             "2C"  : 0,
-            "1C"  : 0,
+            "1C"  : 0
         };
     }
        

@@ -15,7 +15,7 @@ export class Wallet{
                 "10C" : 0,
                 "5C"  : 0,
                 "2C"  : 0,
-                "1C"  : 0,
+                "1C"  : 0
             }
         }
         else{

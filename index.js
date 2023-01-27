@@ -5,6 +5,9 @@ const caisse = new Caisse();
 let resteApayer = 0;
 
 document.querySelector("#scanArticle").addEventListener("click",function (){
+    document.querySelectorAll(".argent").forEach(function(element){
+        element.disabled = false;
+    });
     caisse.scanArticle();
 });
 
