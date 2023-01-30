@@ -116,7 +116,7 @@ export class Caisse{
           // compteur pour arreter la boucle une fois qu'il a regarder tous les types de monnaie ou qu'il n'ya plus rien à rendre
           let compteurCaisse = 0;
           console.log(valeurs.length)
-          while (this.montantARendre > 0 || compteurCaisse < valeurs.length) {
+          while (this.montantARendre > 0 || compteurCaisse <= valeurs.length) {
             for (let i = 0; i < valeurs.length; i++) {
               let valeur = valeurs[i];
               if (this.montantARendre >= valeur.value && this.cashFund.stock[valeur.name] >= 1) {
