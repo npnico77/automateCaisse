@@ -129,7 +129,7 @@ export class Caisse{
               }
             }
             compteurCaisse++;
-            console.log(compteurCaisse);
+            console.log("compteur "+compteurCaisse);
           }
           if(this.montantARendre == 0){
             //on decompose le rendu de monnaie            
