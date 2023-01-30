@@ -13,7 +13,8 @@ document.querySelector("#scanArticle").addEventListener("click",function (){
 //au clic sur billet ou piece
 document.querySelectorAll(".argent").forEach(function(element){
     element.addEventListener("click", function(){
-        caisse.addCashPayment();
+        let name = this.id;
+        caisse.addCashPayment(name);
     });
 });
 // au clic sur payer on procède au rendu de monnaie

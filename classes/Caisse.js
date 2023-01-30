@@ -43,13 +43,13 @@ export class Caisse{
         
     }
 
-    addCashPayment(){
+    addCashPayment(name){
       // pour ajouter pieces ou billet au paiement
       // on ne peut pas ajouter d'argent tant que article = 0
       if (this.nbrArticles > 0 ){
         // on désactive l'ajout de nouveaux articles quand on ajoute l'argent pour payer
         document.getElementById("scanArticle").disabled = true;            
-        let name = this.id;
+        
         this.cashPaid.addCash(name);    
         this.cashFund.addCash(name); 
         // on déduit le montant payé du reste à payer
@@ -115,7 +115,7 @@ export class Caisse{
         // Boucle pour voir si on peut rendre pour chaque valeur en fonction de ce qu'il y a en caisse
           // compteur pour arreter la boucle une fois qu'il a regarder tous les types de monnaie ou qu'il n'ya plus rien à rendre
           let compteurCaisse = 0;
-          while (this.montantARendre > 0 || compteurCaisse < valeurs.lenght) {
+          while (this.montantARendre > 0 || compteurCaisse < valeurs.length) {
             for (let i = 0; i < valeurs.length; i++) {
               let valeur = valeurs[i];
               if (this.montantARendre >= valeur.value && this.cashFund.stock[valeur.name] >= 1) {
