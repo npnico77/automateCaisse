@@ -44,6 +44,7 @@ export class Caisse{
     }
 
     addCashPayment(){
+      // pour ajouter pieces ou billet au paiement
       // on ne peut pas ajouter d'argent tant que article = 0
       if (this.nbrArticles > 0 ){
         // on désactive l'ajout de nouveaux articles quand on ajoute l'argent pour payer
