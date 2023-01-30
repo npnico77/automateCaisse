@@ -49,7 +49,6 @@ export class Caisse{
         // on deduit totalArticles de ce montant pour connaitre le montant à rendre
         this.montantARendre = sommeDonnee - this.totalArticles;
         this.montantARendre = this.montantARendre.toFixed(2);
-        console.log(this.montantARendre);
         document.getElementById("payer").disabled = true; 
 
         // on affiche le montant à rendre :
@@ -57,7 +56,7 @@ export class Caisse{
         divMonnaie.classList.add("fw-bold","monnaieArendre");
         divMonnaie.innerHTML = "Monnaie à rendre : "+ this.montantARendre +"€"
         document.querySelector(".paiement").append(divMonnaie)  */ 
-        
+
         this.proceedCashback();
     }
 
@@ -82,10 +81,9 @@ export class Caisse{
           ];
            
         // Boucle pour voir si on peut rendre pour chaque valeur en fonction de ce qu'il y a en caisse
-          // compteur pour arreter la boucle une fois qu'il a regarder tous les types de monnaie
+          // compteur pour arreter la boucle une fois qu'il a regarder tous les types de monnaie ou qu'il n'ya plus rien à rendre
           let compteurCaisse = 0;
-
-          while (this.montantARendre > 0 || compteurCaisse <= valeurs.lenght) {
+          while (this.montantARendre > 0 || compteurCaisse < valeurs.lenght) {
             for (let i = 0; i < valeurs.length; i++) {
               let valeur = valeurs[i];
               if (this.montantARendre >= valeur.value && this.cashFund.stock[valeur.name] >= 1) {
@@ -100,7 +98,7 @@ export class Caisse{
             compteurCaisse++;
           }
           if(this.montantARendre == 0){
-            //on affiche le rendu de monnaie            
+            //on decompose le rendu de monnaie            
             for(let elt in this.cashBack.stock){ 
                 let valeur = 0; 
                 if (this.cashBack.stock[elt] > 0 ){  
@@ -110,6 +108,7 @@ export class Caisse{
                     }      
                 }
             }
+            // on execute la fonction qui affiche le rendu
             this.affichageMonnaie();            
             document.getElementById("newClient").disabled = false;
           }else{
@@ -124,7 +123,6 @@ export class Caisse{
     }
 
    async affichageMonnaie(){     
-        
         const denoms = [
             {position: 1 ,value: '50E', classes: 'btn-info', text: '50€'},
             {position: 2 ,value: '20E', classes: 'btn-info', text: '20€'},
@@ -158,6 +156,7 @@ export class Caisse{
             // attente de 0.5s entre l'affichage de chaque billet/piece
             await new Promise((resolve, reject) => setTimeout(resolve, 500));
          }
+         console.log(this.cashFund.stock);
     }
 
     newClient(){
