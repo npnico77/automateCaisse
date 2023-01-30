@@ -115,6 +115,7 @@ export class Caisse{
         // Boucle pour voir si on peut rendre pour chaque valeur en fonction de ce qu'il y a en caisse
           // compteur pour arreter la boucle une fois qu'il a regarder tous les types de monnaie ou qu'il n'ya plus rien à rendre
           let compteurCaisse = 0;
+          console.log(valeurs.length)
           while (this.montantARendre > 0 || compteurCaisse < valeurs.length) {
             for (let i = 0; i < valeurs.length; i++) {
               let valeur = valeurs[i];
@@ -128,6 +129,7 @@ export class Caisse{
               }
             }
             compteurCaisse++;
+            console.log(compteurCaisse);
           }
           if(this.montantARendre == 0){
             //on decompose le rendu de monnaie            
