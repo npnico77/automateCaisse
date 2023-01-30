@@ -26,6 +26,7 @@ export class Caisse{
         this.totalArticles = 0;
         this.montantARendre = 0;
         this.affichageArendre =[];
+        this.resteApayer = 0;
     }
 
 
@@ -40,6 +41,36 @@ export class Caisse{
         document.querySelector("#totalArticles").innerText = this.totalArticles.toFixed(2);
         document.querySelector("#resteAPayer").innerText = this.totalArticles.toFixed(2);
         
+    }
+
+    addCashPayment(){
+      // on ne peut pas ajouter d'argent tant que article = 0
+      if (this.nbrArticles > 0 ){
+        // on désactive l'ajout de nouveaux articles quand on ajoute l'argent pour payer
+        document.getElementById("scanArticle").disabled = true;            
+        let name = this.id;
+        this.cashPaid.addCash(name);    
+        this.cashFund.addCash(name); 
+        // on déduit le montant payé du reste à payer
+        this.resteApayer = this.totalArticles.toFixed(2) - this.cashPaid.countCash().toFixed(2);
+       
+        if (this.resteApayer <= 0){   
+             // si le montant donnée est sup ou égale à totalArticles
+            // => - on bloque la possibilité de rajouter billets et pieces          
+            document.querySelector("#resteAPayer").innerText = "0";
+            document.querySelectorAll(".argent").forEach(function(element){
+                element.disabled = true;
+            });
+            this.resteApayer = 0;
+            document.querySelector("#dejaPaye").innerText = this.cashPaid.countCash().toFixed(2);
+            //on active le bouton de paiement final
+            document.getElementById("payer").disabled = false;    
+        }else{                   
+            document.querySelector("#resteAPayer").innerText = this.resteApayer.toFixed(2);
+            document.querySelector("#dejaPaye").innerText = this.cashPaid.countCash().toFixed(2);
+        }
+
+      }            
     }
 
     proceedPayment(){

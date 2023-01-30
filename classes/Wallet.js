@@ -22,9 +22,6 @@ export class Wallet{
             this.stock = stock;
         }
     }
-    getAmount(){
-
-    }
 
     //ajouter piece ou billet au wallet
     addCash(name, quantity = 1){
@@ -35,6 +32,9 @@ export class Wallet{
     removeCash(name, quantity = 1){
         if (this.stock[name]>=quantity){
             this.stock[name] -= quantity;
+            return true;
+        }else{
+            return false;
         }
     }
 
